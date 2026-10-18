@@ -2,7 +2,7 @@
   'use strict';
 
   // TODO: point this at your dashboard page
-  const DASHBOARD_URL = 'Dashboard/dashboard.html';
+  const DASHBOARD_URL = 'index.html';
 
   const form = document.getElementById('loginForm');
   const email = document.getElementById('email');
