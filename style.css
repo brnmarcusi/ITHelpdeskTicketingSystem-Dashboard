@@ -1,0 +1,340 @@
+/* ==========================================================
+   IT Help Desk Ticketing System: Login page
+   Requires varss.css to be loaded first.
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--navy);
+  background: var(--background-for-website);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue-top);
+  outline-offset: 2px;
+}
+
+/* ---------- Page layout ---------- */
+
+.login {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 603px);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  padding: clamp(16px, 3vw, 43px);
+  background: linear-gradient(180deg, var(--blue-top) 0%, var(--blue-bottom) 100%);
+}
+
+/* ---------- Left side ---------- */
+
+.hero {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: #ffffff;
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 773px;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.9vw, 4.375rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+
+.hero-text {
+  margin: 0;
+  max-width: 747px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.7vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.427;
+  letter-spacing: 0.01em;
+  text-align: justify; /* "justified" is not a valid value */
+}
+
+.hero-image {
+  width: min(100%, 382px);
+  height: auto;
+  aspect-ratio: 382 / 367.92;
+  margin-top: auto;
+  object-fit: cover;
+  filter: drop-shadow(25px 13px 16px rgba(0, 0, 0, 0.31));
+}
+
+/* ---------- Login card ---------- */
+
+.login-card {
+  width: 100%;
+  padding: clamp(24px, 4vw, 49px) 0 clamp(32px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 35px;
+  box-shadow: 0 4px 24.6px 3px rgba(0, 0, 0, 0.46);
+  overflow: hidden;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 16px 20px 16px 50px;
+  background: var(--navy);
+}
+
+.brand-logo {
+  flex-shrink: 0;
+  width: clamp(64px, 12vw, 100px);
+  height: auto;
+}
+
+.brand-name {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 3.2vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.card-body {
+  padding: 30px clamp(20px, 4vw, 44px) 0;
+}
+
+.login-title {
+  margin: 0 0 20px;
+  color: var(--navy-dark);
+  font-size: clamp(2rem, 6vw, 3.125rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* ---------- Form ---------- */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.field input {
+  width: 100%;
+  height: 45px;
+  padding: 0 26px;
+  font: 400 1rem var(--font-body);
+  color: var(--navy);
+  background: #ffffff;
+  border: 1px solid var(--border-navy);
+  border-radius: 10px;
+}
+
+.field input::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+.field input:focus {
+  border-color: var(--blue-link);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+/* Reserved height so the layout doesn't jump when an error appears */
+.field-error {
+  min-height: 1.25rem;
+  margin: 2px 0 0;
+  color: var(--error);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 56px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.toggle-password[aria-pressed="true"],
+.toggle-password:hover {
+  opacity: 1;
+}
+
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.forgot-link {
+  align-self: flex-end;
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.btn-signin {
+  width: 100%;
+  height: 47px;
+  margin-top: 24px;
+  font: 400 1.5rem var(--font-body);
+  color: #ffffff;
+  background: var(--navy);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-signin:hover {
+  background: var(--navy-dark);
+}
+
+/* ---------- Social sign-in ---------- */
+
+.divider {
+  margin: 32px 0 16px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* The original white-on-white pills were invisible, so they get a border */
+.social-btn {
+  display: grid;
+  place-items: center;
+  padding: 6px 27px;
+  background: #ffffff;
+  border: 1px solid var(--social-border);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+
+.social-btn:hover {
+  box-shadow: 0 2px 8px rgba(16, 45, 89, 0.2);
+}
+
+.social-btn img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.register {
+  margin: 32px 0 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.register a {
+  color: var(--blue-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Tablet and mobile ---------- */
+
+@media (max-width: 960px) {
+  .login {
+    grid-template-columns: minmax(0, 603px);
+    justify-content: center;
+  }
+
+  /* Show the form first on small screens */
+  .login-card {
+    order: -1;
+  }
+
+  .hero-image {
+    display: none;
+  }
+
+  .hero-text {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .social {
+    gap: 16px;
+  }
+
+  .social-btn {
+    padding: 6px 20px;
+  }
+
+  .btn-signin {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

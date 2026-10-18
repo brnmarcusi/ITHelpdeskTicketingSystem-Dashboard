@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Help Desk Ticketing System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<aside id="side">
+  <div class="brand"><span class="iclogo"><img src="Icons\Logotech.png"></span><b>IT Help Desk Ticketing System</b></div>
+  <nav>
+    <button class="nav" data-page="dashboard" onclick="showPage('dashboard')"><span class="ic"><img src="Icons\dashboard.png"></span><b>Dashboard</b></button>
+    <button class="nav" data-page="submit" onclick="newTicket()"><span class="ic"><img src="Icons\submit.png" ></span><b>Submit Ticket</b></button>
+    <button class="nav" data-page="tickets" onclick="showPage('tickets')"><span class="ic"><img src="Icons\ticket.png" ></span><b>Ticket Management</b></button>
+    <button class="nav" data-page="reports" onclick="showPage('reports')"><span class="ic"><img src="Icons\reports.png" ></span><b>Reports</b></button>
+    <button class="nav" data-page="settings" onclick="showPage('settings')"><span class="ic"><img src="Icons\settings.png" ></span><b>Settings</b></button>
+    <button class="nav" data-page="profile" onclick="showPage('profile')"><span class="ic"><img src="Icons\user.png" ></span><b>User Profile</b></button>
+  </nav>
+  <div class="foot">
+    <button class="nav" data-page="support" onclick="showPage('support')"><span class="ic"><img src="Icons\viber.png" ></span><b>Contact Support</b></button>
+    <button class="nav" onclick="logout()"><span class="ic"><img src="Icons\logout.png" data-fb="⏻" alt=""></span><b>Logout</b></button>
+  </div>
+</aside>
+
+<header class="top">
+  <input id="globalSearch" type="search" placeholder="Search tickets, users, or keywords..." onkeydown="if(event.key==='Enter')globalSearch()">
+  <div class="me" onclick="showPage('profile')"><img id="topPhoto" src="Icons/user.png" alt=""><div><b id="topName"></b><small id="topRole"></small></div></div>
+</header>
+
+<main>
+  <!-- 1. Dashboard -->
+  <section class="page" id="p-dashboard">
+    <div class="row"><div><h2 id="greet"></h2><p class="muted">Here's what's happening with your help desk today.</p></div>
+      <button class="btn" onclick="newTicket()">+ Create New Ticket</button></div>
+    <div class="stats">
+      <div class="stat s-blue"><small>Total Tickets</small><b id="dTotal">0</b></div>
+      <div class="stat s-yellow"><small>Pending Tickets</small><b id="dPending">0</b></div>
+      <div class="stat s-green"><small>Resolved Tickets</small><b id="dResolved">0</b></div>
+      <div class="stat s-purple"><small>In Progress</small><b id="dProgress">0</b></div>
+    </div>
+    <div class="card"><h3>Recent Tickets</h3>
+      <div class="scroll"><table><thead><tr><th>Ticket ID</th><th>Subject</th><th>Requester</th><th>Priority</th><th>Status</th><th>Assigned Agent</th><th>Date</th></tr></thead>
+      <tbody id="recentBody"></tbody></table></div></div>
+  </section>
+
+  <!-- 2. Submit a ticket -->
+  <section class="page" id="p-submit">
+    <div class="card"><h2 id="formTitle" class="center">SUBMIT A TICKET</h2><hr>
+      <div class="grid3">
+        <label>Your name *<input id="fName" placeholder="Name"></label>
+        <label>Email *<input id="fEmail" type="email" placeholder="email@gmail.com"></label>
+        <label>Contact Number (Optional)<input id="fPhone"></label>
+        <label>Issue Type<select id="fType"><option>Hardware</option><option selected>Software</option><option>Network</option><option>Account &amp; Access</option><option>Emails</option><option>Printer</option><option>Security</option><option>Other</option></select></label>
+        <label>Priority<select id="fPriority"><option>Low</option><option>Medium</option><option selected>High</option><option>Critical</option></select></label>
+        <label>Agents<select id="fAgent"></select></label>
+        <label>Subject *<input id="fSubject"></label>
+        <label>Due date<input id="fDue" type="date"></label>
+        <label id="statusWrap" hidden>Status<select id="fStatus"><option>Open</option><option>Pending</option><option>In Progress</option><option>Resolved</option><option>Closed</option></select></label>
+      </div>
+      <label>Description *<textarea id="fDesc" rows="9"></textarea></label>
+      <p id="formMsg" class="msg"></p>
+      <div class="right"><button class="btn ghost" onclick="clearForm()">Clear</button> <button class="btn" id="ticketBtn" onclick="saveTicket()">Submit Ticket</button></div>
+    </div>
+  </section>
+
+  <!-- 3. Ticket management -->
+  <section class="page" id="p-tickets">
+    <div class="card"><h2>Ticket Management</h2>
+      <div class="filters">
+        <input id="qKey" placeholder="Keyword..." oninput="renderTickets()">
+        <select id="qStatus" onchange="renderTickets()"><option value="">All Statuses</option><option>Open</option><option>Pending</option><option>In Progress</option><option>Resolved</option><option>Closed</option></select>
+        <select id="qPriority" onchange="renderTickets()"><option value="">All Priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+        <select id="qAgent" onchange="renderTickets()"></select>
+        <span>From</span><input id="qFrom" type="date" onchange="renderTickets()">
+        <span>To</span><input id="qTo" type="date" onchange="renderTickets()">
+        <select id="qSort" onchange="renderTickets()"><option value="new">Newest First</option><option value="old">Oldest First</option><option value="prio">Priority</option></select>
+        <button class="btn ghost" onclick="clearFilters()">Clear</button>
+        <button class="btn danger" onclick="deleteSelected()">Delete Selected</button>
+      </div>
+      <p id="countText" class="muted"></p>
+      <div class="scroll"><table><thead><tr><th></th><th>ID</th><th>Subject</th><th>Requester</th><th>Type</th><th>Priority</th><th>Status</th><th>Agent</th><th>Date</th><th>Action</th></tr></thead>
+      <tbody id="ticketBody"></tbody></table></div>
+      <p id="emptyText" class="muted"></p>
+    </div>
+  </section>
+
+  <!-- 4. Reports -->
+  <section class="page" id="p-reports">
+    <div class="card"><h3>Reports &amp; Summary</h3><div class="stats six" id="reportStats"></div></div>
+    <div class="two">
+      <div class="card"><h3>Most common issues</h3><div id="issueList"></div></div>
+      <div class="card"><h3>Audit log (latest activity)</h3><ul id="auditList"></ul></div>
+    </div>
+  </section>
+
+  <!-- 5. Settings -->
+  <section class="page" id="p-settings">
+    <div class="card"><h2>Technicians</h2>
+      <div id="techList"></div>
+      <label>New Technician<input id="tName" placeholder="Full name.."></label>
+      <p class="muted">Roles:</p><div id="roleBox" class="roles"></div>
+      <p id="techMsg" class="msg"></p>
+      <button class="btn" onclick="addTech()">Add Technician</button>
+    </div>
+  </section>
+
+  <!-- 6. User profile -->
+  <section class="page" id="p-profile">
+    <div class="card"><h2>User Profile</h2>
+      <div class="prof">
+        <div class="photo"><img id="pPhoto" src="images/user.png" alt=""><label class="btn sm">Upload image<input id="pFile" type="file" accept="image/*" hidden onchange="pickPhoto(this)"></label></div>
+        <div class="grow"><label>Display Name<input id="pName"></label><label>Role<input id="pRole"></label>
+          <p id="profMsg" class="msg"></p><div class="right"><button class="btn" onclick="saveProfile()">Save Profile</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Contact support -->
+  <section class="page" id="p-support">
+    <div class="card"><h2>Need Help?</h2><p class="muted">Our support team is here to assist you. Send a message and we will get back to you.</p>
+      <label>Subject<input id="cSubject"></label>
+      <label>Message<textarea id="cMsg" rows="6"></textarea></label>
+      <p id="cMsgOut" class="msg"></p>
+      <button class="btn" onclick="sendSupport()">Send Message</button>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

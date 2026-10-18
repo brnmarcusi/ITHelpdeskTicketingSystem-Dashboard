@@ -1,0 +1,12 @@
+{
+  "nextId": 1003,
+  "profile": { "name": "Tech Username", "role": "Support Agent", "photo": "" },
+  "technicians": [
+    { "id": 1, "name": "Agent Carl Jabagat", "roles": ["Software", "Account & Access", "Emails"] }
+  ],
+  "tickets": [
+    { "id": "HD-1001", "name": "Maria Santos", "email": "maria@gmail.com", "phone": "", "type": "Network", "priority": "High", "agent": "", "subject": "Unable to access company VPN", "due": "2026-09-30", "desc": "VPN client shows an authentication error.", "status": "Open", "created": "2026-09-23T16:30:00", "resolved": "" },
+    { "id": "HD-1002", "name": "John Reyes", "email": "john@gmail.com", "phone": "", "type": "Printer", "priority": "Low", "agent": "Agent Carl Jabagat", "subject": "Printer offline on 2nd floor", "due": "", "desc": "Printer shows offline for all users.", "status": "Open", "created": "2026-09-24T09:10:00", "resolved": "" }
+  ],
+  "audit": []
+}

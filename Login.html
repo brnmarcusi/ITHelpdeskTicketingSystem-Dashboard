@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | IT Help Desk Ticketing System</title>
+
+  <!-- Fonts used by the design (Figma only exports their names, it doesn't load them) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Spline+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Variables first, then the styles that use them -->
+  <link rel="stylesheet" href="varss.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="login">
+
+    <!-- Left side: tagline, description, illustration -->
+    <section class="hero">
+      <h1 class="hero-title">
+        Automate your<br>
+        help desk. Elevate support experiences
+      </h1>
+      <p class="hero-text">
+        IT help desk Ticketing System an operations on auto pilot with
+        ServiceDesk. The system allows users to report concerns such as laptop
+        and printer requests, system access requests, system provisioning, and
+        troubleshooting issues. Once a request is submitted, it can be
+        organized, assigned to the appropriate IT team or personnel, monitored,
+        and documented until it is resolved.
+      </p>
+      <img class="hero-image" src="maleworker.png" alt="Male IT support worker">
+    </section>
+
+    <!-- Right side: login card -->
+    <section class="login-card" aria-labelledby="login-title">
+      <header class="brand">
+        <img class="brand-logo" src="Images_Icons\Logotech.png" alt="Techuser Logo">
+        <p class="brand-name">
+          IT Help Desk<br>
+          Ticketing System
+        </p>
+      </header>
+
+      <div class="card-body">
+        <form class="login-form" id="loginForm" novalidate>
+          <h2 class="login-title" id="login-title">Login</h2>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="username@gmail.com"
+              autocomplete="email"
+              aria-describedby="emailError"
+              required>
+            <p class="field-error" id="emailError" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="password-wrap">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                aria-describedby="passwordError"
+                required>
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="Show password"
+                aria-pressed="false">
+                <img src="Images_Icons\passwordhidden.png" alt="Hide password">
+              </button>
+            </div>
+            <p class="field-error" id="passwordError" role="alert"></p>
+          </div>
+
+          <a class="forgot-link" href="forgot-password.html">Forgot password?</a>
+
+          <button type="submit" class="btn-signin">Sign In</button>
+        </form>
+
+        <p class="divider">Or continue with</p>
+
+        <div class="social">
+          <button type="button" class="social-btn" aria-label="Continue with Google">
+            <img src="google.png" alt="Google">
+          </button>
+          <button type="button" class="social-btn" aria-label="Continue with Facebook">
+            <img src="fb.png" alt="Facebook">
+          </button>
+          <button type="button" class="social-btn" aria-label="Continue with GitHub">
+            <img src="github.png" alt="GitHub">
+          </button>
+        </div>
+
+        <p class="register">
+          Don’t have an account yet?
+          <a href="register.html">Register for free</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

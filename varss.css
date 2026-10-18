@@ -1,0 +1,22 @@
+/* Design tokens (from Figma, tidied). Load this BEFORE style.css. */
+:root,
+[data-variable-collection-mode="mode-1"] {
+  /* Figma variables (mode-1) */
+  --color: #7f99bd;
+  --background-for-website: #ebebeb;
+
+  /* Brand palette used by style.css */
+  --blue-top: #2d86ff;       /* page gradient, top */
+  --blue-bottom: #0b244a;    /* page gradient, bottom */
+  --navy: #29436a;           /* brand band, buttons, labels */
+  --navy-dark: #1d4582;      /* "Login" title, button hover */
+  --border-navy: #102d59;    /* input borders */
+  --blue-link: #006cff;      /* "Register for free" */
+  --placeholder: #b6b6b6;
+  --social-border: #d3dbe8;
+  --error: #c62828;
+
+  /* Fonts (loaded from Google Fonts in login.html) */
+  --font-display: "Spline Sans", sans-serif;
+  --font-body: "Poppins", sans-serif;
+}
